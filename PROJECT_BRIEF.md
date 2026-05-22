@@ -1,68 +1,86 @@
-# Project Brief: Multi-Channel Foundation Models for Long-Horizon Cognitive Impairment Prediction from Sleep Studies
+# PROJECT_BRIEF.md
 
-## One-line description
+> One-page outward-facing brief for SG Research's PhysioNet 2026 Challenge entry.
 
-A machine learning system that predicts a patient's risk of developing cognitive impairment 3-7 years after a routine clinical sleep study, by combining multi-channel physiological signals with modern foundation-model representations.
+## One-line Description
 
-## Why this matters
+Machine learning models that predict future cognitive impairment (MCI, Alzheimer's, dementia) from multi-channel polysomnogram recordings, using the PhysioNet/Computing in Cardiology Challenge 2026 dataset as a high-quality research substrate.
 
-Cognitive decline is among the most consequential late-life health outcomes, yet most diagnostic pathways detect it only after substantial irreversible neural damage. Polysomnograms (PSGs) — multi-channel sleep studies routinely conducted for sleep apnea, insomnia, and parasomnia workups — capture rich, multi-system physiological information (brain activity, cardiac dynamics, respiratory patterns, autonomic tone) and are increasingly recognized as a window into early neurodegenerative processes. If clinically routine PSGs can be repurposed to stratify cognitive risk years before clinical presentation, the implications for prevention, monitoring, and trial enrollment are substantial.
+## Project Identity
 
-## Scientific contribution
+- **Lab:** SG Research (independent research entity)
+- **Lead:** Samantha Goncalves
+- **Repository:** github.com/sg-research/physionet-2026-sleep-cognition
+- **Challenge team name:** Masam (if collaborative) or SG Research (solo)
 
-The project addresses three open methodological questions in clinical biosignal ML:
+## Why It Matters
 
-1. **Are domain-specific foundation models necessary, or do generic time-series foundation models transfer well to multi-channel physiological signals?** Recent evidence (Feofanov et al., 2025) suggests generic TSFMs match or beat EEG-specific FMs on EEG tasks. We test this systematically on a long-horizon clinical outcome.
+Sleep is a uniquely accessible window into brain health. Polysomnograms (PSGs) are routinely collected in clinical sleep labs and contain rich multi-channel signals (EEG, ECG, EOG, EMG, respiratory effort, airflow) that reflect underlying neurological function. If we can predict cognitive decline 3–7 years before clinical diagnosis from a single overnight recording, we open a path to earlier intervention — when treatments are most likely to be effective and when patients and families have time to plan.
 
-2. **At what temporal resolution does cognitive-decline signal live in PSG data?** Multi-resolution masked-autoencoder analysis (HiMAE-style) interrogates whether predictive structure exists in sub-second micro-architecture, 30-second epoch transitions, or hour-scale architecture.
+## Scientific Contribution
 
-3. **How robust are these predictions to inter-site variation?** Multi-center training (five US institutions) with explicit causal/site-shift representation learning makes generalization quantifiable rather than assumed.
+The project addresses three open methodological questions in biosignal ML:
+
+1. **Are EEG-specific foundation models actually better than generic time-series foundation models for clinical prediction tasks?** Mantis (Feofanov 2025) recently outperformed EEG-specific models on EEG benchmarks — surprising and unsettled. We will test this on a high-stakes clinical outcome.
+
+2. **At what temporal resolution does the cognitive-decline signal live?** Multi-resolution self-supervised pre-training (HiMAE-style) lets us interrogate which time scales — micro-arousal, sleep stage, full-night architecture — carry predictive information for long-horizon outcomes.
+
+3. **How do we handle multi-site clinical heterogeneity?** Validation and test sets come from different sites than training. Channel-tokenization + site-shift causal representation learning are the most credible recent approaches.
 
 ## Data
 
-The Human Sleep Project (bdsp.io) — multi-center polysomnograms from BIDMC, Emory, Kaiser Permanente, Mass General Brigham, and Stanford, with longitudinal cognitive outcome ascertainment 3-7 years post-PSG. Multi-channel signals include EEG, ECG, respiratory effort, oxygen saturation, and EOG/EMG.
+- **Primary:** PhysioNet 2026 Challenge data on Kaggle — 622 PSGs (~4,696 hours) from BIDMC, MGB, and Stanford-affiliated sites
+- **Secondary (pending):** SHHS, Sleep-EDF, BDSP datasets (Ye et al. sleep-dementia work, Stanford Sleep Bench, Harvard EEG Database) for pre-training and cross-cohort validation
 
 ## Methods
 
-A foundation-model-based architecture combining:
-
-- **Channel-tokenized signal encoders** that handle heterogeneous montages across sites
-- **Multiple pre-trained foundation models compared head-to-head**: EEG-specific (CBraMod, LaBraM) and generic time-series (Mantis), plus a cross-domain transfer experiment using speech foundation models (Wav2Vec2-style)
-- **Multi-resolution self-supervised pre-training** on the PSG corpus
-- **Subject-aware contrastive learning** to address inter-subject signal variation
-- **Mixture-of-experts survival heads** for calibrated 3-7 year time-to-event prediction
-- **Conformal prediction** for distribution-free uncertainty intervals
-- **Causal representation learning** for multi-site distributional robustness
+- Foundation model comparison: CBraMod, LaBraM, Mantis adapted to PSG
+- Channel-tokenization for heterogeneous montages
+- Subject-aware contrastive pre-training
+- MoE survival heads for 3–7 year time-to-event prediction
+- Conformal prediction for calibrated uncertainty
+- xMADD diffusion-based waveform augmentation
 
 ## Evaluation
 
-- AUROC and AUPRC on the hidden PhysioNet 2026 test set
-- Subject-level cross-validation (not random splits — random splits leak signal through subject-level correlations)
-- Expected calibration error, Brier score, reliability diagrams
-- Per-site performance breakdown to quantify cross-institutional transfer
-- Comparison to clinical baselines (age, sex, comorbidities only)
+- **Primary metric:** AUROC on hidden test set (Challenge scoring)
+- **Secondary:** Calibration, conformal interval coverage, site-stratified performance, ablations across temporal resolutions and foundation model backbones
 
 ## Deliverables
 
-- Official PhysioNet 2026 challenge submission with leaderboard ranking
-- Peer-reviewed paper in Computing in Cardiology 2026 proceedings (Conference in Spain, September 2026)
-- ML4H 2026 workshop cross-submission
-- CS229 final project report (Stanford, Summer 2026)
-- Public GitHub repository with reproducible pipeline
-- arXiv preprint
-- An MCP server exposing the trained predictor as a callable tool (stretch goal)
+| Output | Timeline |
+|---|---|
+| PhysioNet leaderboard submission | Late May – Aug 2026 |
+| CS229 final project report | August 2026 |
+| Public GitHub repository | Continuous |
+| Open-source code release (with Challenge) | October 2026 |
+| arXiv preprint | After Oct 2026 (publication restriction lifts) |
+| ML4H 2026 paper | If embargo-compatible angle works (~Sept 2026) |
+| ML4H 2027 / MLHC 2027 / journal | Primary publication target, ~2027 |
 
 ## Timeline
 
-- **June-August 2026** — primary development concurrent with Stanford CS229
-- **July 2026** — CinC abstract submission, CS229 milestone deliverables
-- **September 2026** — official PhysioNet submission, CinC paper, ML4H submission
-- **December 2026** — ML4H 2026 presentation if accepted
+- **Late May 2026:** Official phase opens — baseline submission target
+- **June–August 2026:** Model development concurrent with Stanford CS229
+- **Late August 2026:** Official phase closes
+- **September 2026:** CinC 2026 (Madrid) — not attending (no abstract)
+- **Early October 2026:** Challenge ends; publication restriction lifts
+- **2027:** Extended methods paper to ML4H, MLHC, or journal venue
 
-## Why this candidate
+## Career Relevance
 
-This project sits at the intersection of clinical pharmacology, neuroscience, and machine learning. The candidate brings: prior clinical research experience including CNS / neuro therapeutic areas; Stanford CS coursework in algorithms, systems, and machine learning (CS229); and a publication trajectory specifically targeting venues that span these domains (CinC, ML4H, NeurIPS Datasets & Benchmarks, ML4H 2027, and a parallel drug-safety prediction project for the Insitro / Recursion / Aitia track).
+This project sits at the intersection of three areas that matter for ML scientist roles in health tech:
 
-## Career relevance
+- **Time-series foundation models on physiological signals** — directly aligned with Apple Health Technologies, Verily, Beacon
+- **Multi-site clinical ML with calibrated uncertainty** — relevant for any biotech/health-tech ML role
+- **Clinical translation discipline** — leveraging prior clinical research background in a quantitative role
 
-The methodological stack — multi-sensor physiological time-series ML, foundation model fine-tuning, calibrated clinical prediction, multi-site robustness, multimodal fusion — is the core profile sought by Apple Health Technologies, Verily, Beacon, Anthropic Health, and clinical AI startups working on early-detection systems for neurodegenerative disease.
+## Honest Status
+
+This is a research project using high-quality Challenge data rather than a competition entry pursuing prizes:
+
+- ✗ Not eligible for prizes, rankings, wild card, or CinC presentation (missed unofficial phase + abstract deadline)
+- ✓ Eligible for public leaderboard scoring during competition
+- ✓ Code becomes publicly available after Challenge ends
+- ✓ Methods publishable independently after October 2026
+- ✓ Primary scholarly value comes from the publication path, not the Challenge ranking
