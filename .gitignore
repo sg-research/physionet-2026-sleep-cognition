@@ -1,10 +1,15 @@
 # ---------- Data: never commit patient data ----------
-# Ignore directory contents but keep the .gitkeep placeholders so the
-# layout persists across clones.
+# `data/kaggle_raw` is a symlink to the kagglehub cache populated by
+# scripts/download_kaggle_data.py — ignore the symlink itself, not just
+# its contents (the `data/kaggle_raw/*` pattern doesn't match a symlink).
+data/kaggle_raw
 data/kaggle_raw/*
+
+# `data/processed/` and `data/external/` stay as empty directories awaiting
+# future data — ignore their contents but keep the .gitkeep placeholders so
+# the layout persists across clones.
 data/processed/*
 data/external/*
-!data/kaggle_raw/.gitkeep
 !data/processed/.gitkeep
 !data/external/.gitkeep
 
