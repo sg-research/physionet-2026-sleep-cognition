@@ -103,6 +103,7 @@ kaggle.json
 # ---------- Internal / private ----------
 CLAUDE.md
 PROJECT_BRIEF.md
+GETTING_STARTED.md
 
 # ---------- OS / Editor ----------
 .DS_Store
