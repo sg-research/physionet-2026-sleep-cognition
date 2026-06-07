@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "ML models predicting future cognitive impairment from polysomnogram recordings (PhysioNet/CinC Challenge 2026)."
 readme = "README.md"
 requires-python = ">=3.12,<3.13"
-authors = [{ name = "Samantha Goncalves", email = "gcmasam@gmail.com" }]
+authors = [{ name = "Samantha Goncalves", email = "sam.v.goncalves@gmail.com" }]
 license = { text = "MIT" }
 dependencies = [
     # Deep learning core — torch on macOS ships with MPS support
