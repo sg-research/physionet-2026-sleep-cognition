@@ -106,4 +106,17 @@ def main():
     sex_counts_pd = df_pd["Sex"].value_counts().sort_index()
     sns.barplot(x=sex_counts_pd.index.astype(str), y=sex_counts_pd.values, ax=axes[4])
     axes[4].set_title("Sex Distribution")
-    axes[4
+    axes[4].set_xlabel("Sex")
+    axes[4].set_ylabel("Count")
+
+    # Hide unused subplot
+    axes[5].axis('off')
+
+    plt.tight_layout()
+    plt.savefig("notebooks/figures/demographics_overview.png", dpi=300, bbox_inches="tight")
+    plt.close()
+    print("\nFigure saved to notebooks/figures/demographics_overview.png")
+
+
+if __name__ == "__main__":
+    main()
