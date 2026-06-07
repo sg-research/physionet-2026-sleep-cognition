@@ -29,7 +29,7 @@ uv sync
 # Activate the environment (optional — `uv run <cmd>` works without this)
 source .venv/bin/activate
 
-# Download the Challenge data from Kaggle (~80 GB)
+# Download the Challenge data from Kaggle (~130 GB)
 uv run python scripts/download_kaggle_data.py
 ```
 
