@@ -20,10 +20,6 @@ patient will receive a cognitive impairment diagnosis 3–7 years
 post-recording. Primary metric: **AUROC** between Group 1 (future diagnosis
 3–7y) and Group 2 (no diagnosis, 7+ years follow-up).
 
-See [`CLAUDE.md`](./CLAUDE.md) for full project context, methodological
-decisions, timeline, and Challenge eligibility constraints. See
-[`PROJECT_BRIEF.md`](./PROJECT_BRIEF.md) for the research framing.
-
 ## Quickstart
 
 ```bash
