@@ -11,7 +11,7 @@ from multi-channel polysomnogram (PSG) recordings, using the
 - **Lead Researcher:** Samantha Goncalves
 - **GitHub Org:** https://github.com/sg-research
 - **Repository:** https://github.com/sg-research/physionet-2026-sleep-cognition
-- **PhysioNet Team Name:** `Masam` (if Masoud co-submits) / `SG Research` (solo)
+- **PhysioNet Team Name:** SG Research
 
 ## Task
 
