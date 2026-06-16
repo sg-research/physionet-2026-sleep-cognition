@@ -43,10 +43,10 @@ def main():
         print("\nTime_to_Event Stats (True cases): No True cases found.")
 
     # Site distribution (S0001, I0002, I0006 counts)
-    site_counts = df["Site"].value_counts().sort("Site")
+    site_counts = df["SiteID"].value_counts().sort("SiteID")
     print("\nSite Distribution:")
     for row in site_counts.iter_rows(named=True):
-        print(f"  {row['Site']}: {row['count']}")
+        print(f"  {row['SiteID']}: {row['count']}")
 
     # Age mean/std/min/max
     age = df["Age"]
@@ -89,7 +89,7 @@ def main():
     axes[1].set_xlabel("Time to Event")
 
     # Site distribution bar chart
-    site_counts_pd = df_pd["Site"].value_counts().sort_index()
+    site_counts_pd = df_pd["SiteID"].value_counts().sort_index()
     sns.barplot(x=site_counts_pd.index, y=site_counts_pd.values, ax=axes[2])
     axes[2].set_title("Site Distribution")
     axes[2].set_xlabel("Site")

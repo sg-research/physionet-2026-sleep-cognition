@@ -30,6 +30,8 @@ dependencies = [
     "wandb>=0.18",
     # Plotting (referenced from notebooks)
     "matplotlib>=3.9",
+    "jupyterlab>=4.5.8",
+    "seaborn>=0.13.2",
 ]
 
 [dependency-groups]
