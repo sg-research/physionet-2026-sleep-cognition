@@ -122,3 +122,5 @@ desktop.ini
 *.log
 logs/
 .aider*
+.ipynb_checkpoints/
+notebooks/figures/
